@@ -1,0 +1,40 @@
+{
+  "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+  "width": 460,
+  "height": 430,
+  "projection": {"type": "equirectangular"},
+  "data": {
+  "url": "https://raw.githubusercontent.com/jess11111/FIT3174/main/features%20(3)%20(1)%20(3).topojson",
+  "format": {"type": "topojson", "feature": "features"}
+  },
+  "transform": [
+  {
+  "lookup": "properties.vic_loca_2",
+  "from": {
+  "data": {
+  "url": "https://raw.githubusercontent.com/jess11111/FIT3174/main/choroplethdata.csv"
+  },
+  "key": "Uppercase",
+  "fields": ["Priceperbedroom"]
+  }
+  }
+  ],
+  "mark": {"type": "geoshape"},
+  "encoding": {
+  "color": {
+  "field": "Priceperbedroom",
+  "title": "$ per room",
+  "type": "quantitative",
+  "legend": {"orient": "none","direction": "horizontal","padding":-5,"legendX":22,"legendY":343,"gradientLength":800},
+  "scale": {
+  "type": "threshold",
+  "domain": [250000, 400000, 500000, 700000],
+  "range": ["#ffffcc", "#a1dab4", "#41b6c4", "#2c7fb8", "#253494"]
+  }
+  },
+  "tooltip": [
+    {"field": "Priceperbedroom", "type": "quantitative", "title": "Priceperbedroom"},
+    {"title": "Suburb", "field": "properties.vic_loca_2", "type": "nominal"}
+  ]
+  }
+ }
